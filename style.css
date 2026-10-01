@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Playfair+Display:ital,wght@0,500;1,500&display=swap');
+
+:root{
+  --cream:#f1ede4; --ink:#171714; --muted:#77736a; --line:#d7d0c4; --dark:#1b1a17;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:"DM Sans",Arial,sans-serif}
+a{text-decoration:none;color:inherit}
+button,input{font:inherit}
+.nav{height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 4vw;border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(241,237,228,.94);backdrop-filter:blur(12px);z-index:10}
+.logo{font-size:15px;letter-spacing:.42em;font-weight:500}
+.nav nav{display:flex;gap:32px;font-size:13px}
+.nav nav a:hover,.footer-brand~div a:hover{text-decoration:underline}
+.cart-btn,.cart-top button{border:0;background:none;cursor:pointer}
+.cart-btn{font-size:13px}.cart-btn span{margin-left:6px}
+.hero{min-height:78vh;background:
+linear-gradient(90deg,rgba(20,18,14,.58),rgba(20,18,14,.08)),
+url("assets/elora-collection.png") center 22%/cover no-repeat;display:flex;align-items:end;padding:7vw;color:#fff}
+.hero-copy{max-width:600px}
+.eyebrow{font-size:10px;letter-spacing:.22em;text-transform:uppercase;margin:0 0 18px}
+.hero h1{font-size:clamp(58px,9vw,132px);line-height:.83;margin:0 0 28px;font-weight:400;letter-spacing:-.055em}
+.hero h1 em{font-family:"Playfair Display",serif;font-weight:500}
+.hero-text{max-width:390px;line-height:1.6;font-size:14px;margin-bottom:28px}
+.button{display:inline-block;border:0;background:var(--ink);color:#fff;padding:14px 22px;cursor:pointer;font-size:12px;letter-spacing:.04em}
+.hero .button{background:#fff;color:var(--ink)}
+.intro{padding:12vw 8vw 6vw;max-width:1000px}
+.intro h2,.story h2,.newsletter h2{font-size:clamp(38px,5vw,72px);line-height:.98;font-weight:400;letter-spacing:-.045em;margin:0 0 24px}
+.intro>p:last-child{max-width:440px;color:var(--muted);line-height:1.6}
+.lookbook{padding:0 4vw 10vw}
+.lookbook img{display:block;width:100%;height:auto}
+.shop{padding:4vw 4vw 10vw}
+.section-head{display:flex;justify-content:space-between;align-items:end;border-bottom:1px solid var(--line);padding-bottom:22px;margin-bottom:26px}
+.section-head h2{font-size:48px;font-weight:400;letter-spacing:-.04em;margin:0}
+.section-head>p{color:var(--muted);font-size:13px}
+.products{display:grid;grid-template-columns:repeat(3,1fr);gap:34px 18px}
+.product-img{aspect-ratio:1/1.12;background:#ddd8ce;overflow:hidden}
+.product-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.product-card:hover img{transform:scale(1.025)}
+.product-info{display:flex;justify-content:space-between;gap:10px;padding-top:13px}
+.product-name{font-size:14px}.price{font-size:13px;color:var(--muted);margin-top:5px}
+.add{border:0;background:none;text-decoration:underline;cursor:pointer;font-size:12px;white-space:nowrap}
+.story{display:grid;grid-template-columns:1fr 1fr;gap:10vw;padding:12vw 8vw;background:#dcd5c8}
+.story>p{max-width:460px;align-self:end;line-height:1.8;color:#4f4a42}
+.newsletter{padding:12vw 8vw;text-align:center}
+.newsletter h2{margin-bottom:34px}
+.newsletter form{display:flex;max-width:600px;margin:auto;border-bottom:1px solid var(--ink)}
+.newsletter input{flex:1;border:0;background:transparent;padding:15px 0;outline:0}
+.newsletter .button{margin-bottom:4px}
+.small{font-size:11px;color:var(--muted)}
+footer{background:var(--dark);color:#eee9df;padding:6vw 4vw;display:grid;grid-template-columns:2fr 1fr 1fr;gap:5vw}
+footer .logo{margin-bottom:12px}footer p{color:#aaa49a;font-size:13px}
+footer a{display:block;font-size:12px;margin:11px 0;color:#d7d1c7}
+footer .eyebrow{color:#777168}
+.cart-drawer{position:fixed;right:0;top:0;width:min(430px,100%);height:100vh;background:var(--cream);z-index:30;padding:28px;transform:translateX(105%);transition:.35s;box-shadow:-10px 0 40px rgba(0,0,0,.08);overflow:auto}
+.cart-drawer.open{transform:translateX(0)}
+.cart-top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:18px}
+.cart-top h3{font-size:22px;font-weight:400;margin:0}
+.cart-item{display:grid;grid-template-columns:72px 1fr auto;gap:13px;padding:18px 0;border-bottom:1px solid var(--line)}
+.cart-item img{width:72px;height:82px;object-fit:cover}
+.cart-item h4{margin:2px 0 6px;font-size:13px;font-weight:500}
+.cart-item p{margin:0;color:var(--muted);font-size:12px}
+.remove{border:0;background:none;text-decoration:underline;font-size:11px;cursor:pointer}
+.cart-total{display:flex;justify-content:space-between;margin:24px 0;font-size:14px}
+.full{width:100%}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.3);z-index:20;opacity:0;pointer-events:none;transition:.25s}
+.overlay.show{opacity:1;pointer-events:auto}
+@media(max-width:800px){
+  .nav{padding:0 5vw}.nav nav{display:none}
+  .hero{min-height:72vh;padding:8vw 6vw}
+  .products{grid-template-columns:repeat(2,1fr);gap:28px 10px}
+  .section-head h2{font-size:36px}.story{grid-template-columns:1fr;gap:30px}
+  footer{grid-template-columns:1fr 1fr}
+  .footer-brand{grid-column:1/-1}
+}
+@media(max-width:520px){
+  .products{grid-template-columns:1fr}.lookbook{padding:0 0 16vw}
+  .intro,.shop,.newsletter{padding-left:6vw;padding-right:6vw}
+  .newsletter form{display:block;border:0}.newsletter input{width:100%;border-bottom:1px solid var(--ink);margin-bottom:10px}
+  footer{grid-template-columns:1fr}
+}
