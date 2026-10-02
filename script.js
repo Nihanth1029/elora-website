@@ -1,9 +1,9 @@
 const products = [
-  {id:1,name:"Oversized Shirt",price:1499,img:"prod-tee.jpg",sizes:["S","M","L","XL"]},
-  {id:2,name:"Classic Tee",price:799,img:"prod-tee.jpg",sizes:["S","M","L","XL"]},
-  {id:3,name:"Linen Pants",price:1999,img:"new.jpg",sizes:["S","M","L","XL"]},
-  {id:5,name:"ELORA Cap",price:499,img:"cap.jpg",sizes:["One Size"]},
-  {id:6,name:"Shoulder Bag",price:1299,img:"prod-bag.jpg",sizes:["One Size"]}
+  {id:1,name:"Oversized Shirt",price:1499,img:"/prod-tee.jpg",sizes:["S","M","L","XL"]},
+  {id:2,name:"Classic Tee",price:799,img:"/prod-tee.jpg",sizes:["S","M","L","XL"]},
+  {id:3,name:"Linen Pants",price:1999,img:"/new.jpg",sizes:["S","M","L","XL"]},
+  {id:5,name:"ELORA Cap",price:499,img:"/cap.jpg",sizes:["One Size"]},
+  {id:6,name:"Shoulder Bag",price:1299,img:"/prod-bag.jpg",sizes:["One Size"]}
 ];
 
 let cart = JSON.parse(localStorage.getItem("eloraCart") || "[]");
