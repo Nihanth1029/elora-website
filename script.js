@@ -1,10 +1,10 @@
 const products = [
-  {id:1,name:"Oversized Shirt",price:1499,img:"assets/elora-collection.png",sizes:["S","M","L","XL"]},
-  {id:2,name:"Classic Tee",price:799,img:"assets/elora-collection.png",sizes:["S","M","L","XL"]},
-  {id:3,name:"Linen Pants",price:1999,img:"assets/elora-collection.png",sizes:["S","M","L","XL"]},
-  {id:4,name:"Hoodie",price:1799,img:"assets/elora-collection.png",sizes:["S","M","L","XL"]},
-  {id:5,name:"ELORA Cap",price:499,img:"assets/elora-collection.png",sizes:["One Size"]},
-  {id:6,name:"Shoulder Bag",price:1299,img:"assets/elora-collection.png",sizes:["One Size"]}
+  {id:1,name:"Oversized Shirt",price:1499,img:"elora-collection.png",sizes:["S","M","L","XL"]},
+  {id:2,name:"Classic Tee",price:799,img:"elora-collection.png",sizes:["S","M","L","XL"]},
+  {id:3,name:"Linen Pants",price:1999,img:"elora-collection.png",sizes:["S","M","L","XL"]},
+  {id:4,name:"Hoodie",price:1799,img:"elora-collection.png",sizes:["S","M","L","XL"]},
+  {id:5,name:"ELORA Cap",price:499,img:"elora-collection.png",sizes:["One Size"]},
+  {id:6,name:"Shoulder Bag",price:1299,img:"elora-collection.png",sizes:["One Size"]}
 ];
 
 let cart = JSON.parse(localStorage.getItem("eloraCart") || "[]");
