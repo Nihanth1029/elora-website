@@ -26,7 +26,13 @@
 <div class="toast" id="toast"></div>
 <script>
 const products=[
-['Oversized Shirt','₹1,499','assets/prod-shirt.jpg','Women'],['Classic Tee','₹799','assets/prod-tee.jpg','Men'],['Linen Pants','₹1,999','assets/prod-pants.jpg','Women'],['Hoodie','₹1,299','assets/prod-hoodie.jpg','Men'],['Cap','₹499','assets/prod-cap.jpg','Accessories'],['Shoulder Bag','₹1,299','assets/prod-bag.jpg','Accessories']];
+['Oversized Shirt','₹1,499','prod-tee.jpg','Women'],
+['Classic Tee','₹799','prod-tee.jpg','Men'],
+['Linen Pants','₹1,999','new.jpg','Women'],
+['Hoodie','₹1,299','prod-hoodie.jpg','Men'],
+['Cap','₹499','cap.jpg','Accessories'],
+['Shoulder Bag','₹1,299','prod-bag.jpg','Accessories']
+];
 let cart=0;
 function render(items=products){document.getElementById('products').innerHTML=items.map((p,i)=>`<article class="product"><button style="border:0;background:none;padding:0;width:100%;cursor:pointer" onclick="addCart('${p[0]}')"><img src="${p[2]}" alt="${p[0]}"></button><div class="product-name">${p[0]}</div><div class="price">${p[1]}</div><div class="swatches"><span class="swatch s1"></span><span class="swatch ${i%2?'s3':'s2'}"></span></div></article>`).join('')}
 function addCart(name){cart++;document.getElementById('cartCount').textContent=cart;showToast(`${name} added to cart`)}
