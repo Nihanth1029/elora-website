@@ -57,10 +57,19 @@ console.log("CART CODE LOADED");document.getElementById('cartBtn').addEventListe
 <h2>Shopping Bag</h2>
 <p>You have ${cartItems.length} item(s) in your bag.</p>
 
-${cartItems.map(p=>`
-<div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid #ddd;">
-  <span>${p[0]}</span>
-  <strong>${p[1]}</strong>
+${cartItems.map((p,index)=>`
+<div style="padding:12px 0;border-bottom:1px solid #ddd;">
+  <div style="display:flex;justify-content:space-between;">
+    <span>${p[0]}</span>
+    <strong>${p[1]}</strong>
+  </div>
+
+  <div style="margin-top:10px;display:flex;gap:8px;align-items:center;">
+    <button onclick="changeQty(${index},-1)">−</button>
+    <span>1</span>
+    <button onclick="changeQty(${index},1)">+</button>
+    <button onclick="removeItem(${index})">Remove</button>
+  </div>
 </div>
 `).join('')}
 
@@ -70,11 +79,30 @@ ${cartItems.map(p=>`
 </h3>
 
 <button id="closeCart">Close</button>`;
-  document.body.appendChild(cartBox);
 
-  document.getElementById('closeCart').onclick=()=>cartBox.remove();
+document.body.appendChild(cartBox);
+
+document.getElementById('closeCart').onclick=()=>cartBox.remove();
 });
 document.getElementById('menuBtn').addEventListener('click',()=>showToast('Use the navigation links above'));
+  function removeItem(index){
+  cartItems.splice(index,1);
+  cart=cartItems.length;
+  document.getElementById('cartCount').textContent=cart;
+  showToast('Item removed');
+}
+
+function changeQty(index,change){
+  if(change===1){
+    cartItems.push(cartItems[index]);
+  }else if(change===-1){
+    cartItems.splice(index,1);
+  }
+
+  cart=cartItems.length;
+  document.getElementById('cartCount').textContent=cart;
+  showToast('Cart updated');
+}
 render();
 </script>
 </body></html>
