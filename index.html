@@ -36,7 +36,7 @@ const products=[
 ];
 let cart=0;
   let cartItems=[];
-function render(items=products){document.getElementById('products').innerHTML=items.map((p,i)=>`<article class="product"><button style="border:0;background:none;padding:0;width:100%;cursor:pointer" onclick="showProduct('${p[0]}')"><img src="${p[2]}" alt="${p[0]}"></button><div class="product-name">${p[0]}</div><div class="price">${p[1]}</div><div class="swatches"><span class="swatch s1"></span><span class="swatch ${i%2?'s3':'s2'}"></span></div></article>`).join('')}
+function render(items=products){document.getElementById('products').innerHTML=items.map((p,i)=>`<article class="product"><button style="border:0;background:none;padding:0;width:100%;cursor:pointer" onclick="addCart('${p[0]}')"><img src="${p[2]}" alt="${p[0]}"></button><div class="product-name">${p[0]}</div><div class="price">${p[1]}</div><div class="swatches"><span class="swatch s1"></span><span class="swatch ${i%2?'s3':'s2'}"></span></div></article>`).join('')}
 function addCart(name){
   const product=products.find(p=>p[0]===name);
   if(!product) return;
