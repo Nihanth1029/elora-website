@@ -51,47 +51,68 @@ function filterProducts(cat){render(products.filter(p=>p[3]===cat));document.get
 function resetProducts(){render()}
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(window.tt);window.tt=setTimeout(()=>t.classList.remove('show'),1800)}
 document.getElementById('signup').addEventListener('submit',e=>{e.preventDefault();e.target.reset();showToast('You’re on the ELORA list.')});
-console.log("CART CODE LOADED");document.getElementById('cartBtn').addEventListener('click',()=>{
+console.log("CART CODE LOADED");
+
+function showCart(){
+  const oldCart=document.getElementById('shoppingCart');
+  if(oldCart) oldCart.remove();
+
   const cartBox=document.createElement('div');
-  cartBox.style.cssText='position:fixed;top:80px;right:15px;width:320px;background:white;z-index:9999;padding:25px;box-shadow:0 5px 25px rgba(0,0,0,.25);border:1px solid #ddd;';
+  cartBox.id='shoppingCart';
+
+  cartBox.style.cssText=
+    'position:fixed;top:80px;right:15px;width:320px;max-width:90%;background:white;z-index:9999;padding:25px;box-shadow:0 5px 25px rgba(0,0,0,.25);border:1px solid #ddd;';
+
+  const total=cartItems.reduce((sum,p)=>{
+    return sum+Number(p[1].replace(/[₹,]/g,''));
+  },0);
+
   cartBox.innerHTML=`
-<h2>Shopping Bag</h2>
-<p>You have ${cartItems.length} item(s) in your bag.</p>
+    <h2>Shopping Bag</h2>
+    <p>You have ${cartItems.length} item(s) in your bag.</p>
 
-${cartItems.map((p,index)=>`
-<div style="padding:12px 0;border-bottom:1px solid #ddd;">
-  <div style="display:flex;justify-content:space-between;">
-    <span>${p[0]}</span>
-    <strong>${p[1]}</strong>
-  </div>
+    ${cartItems.map((p,index)=>`
+      <div style="padding:12px 0;border-bottom:1px solid #ddd;">
+        <div style="display:flex;justify-content:space-between;">
+          <span>${p[0]}</span>
+          <strong>${p[1]}</strong>
+        </div>
 
-  <div style="margin-top:10px;display:flex;gap:8px;align-items:center;">
-    <button onclick="changeQty(${index},-1)">−</button>
-    <span>1</span>
-    <button onclick="changeQty(${index},1)">+</button>
-    <button onclick="removeItem(${index})">Remove</button>
-  </div>
-</div>
-`).join('')}
+        <div style="margin-top:10px;display:flex;gap:8px;align-items:center;">
+          <button onclick="changeQty(${index},-1)">−</button>
+          <span>1</span>
+          <button onclick="changeQty(${index},1)">+</button>
+          <button onclick="removeItem(${index})">Remove</button>
+        </div>
+      </div>
+    `).join('')}
 
-<h3 style="display:flex;justify-content:space-between;">
-  <span>Total</span>
-  <span>₹${cartItems.reduce((sum,p)=>sum+Number(p[1].replace(/[₹,]/g,'')),0).toLocaleString('en-IN')}</span>
-</h3>
+    <h3 style="display:flex;justify-content:space-between;">
+      <span>Total</span>
+      <span>₹${total.toLocaleString('en-IN')}</span>
+    </h3>
 
-<button id="closeCart">Close</button>`;
+    <button id="closeCart">Close</button>
+  `;
 
-document.body.appendChild(cartBox);
+  document.body.appendChild(cartBox);
 
-document.getElementById('closeCart').onclick=()=>cartBox.remove();
+  document.getElementById('closeCart').onclick=()=>{
+    cartBox.remove();
+  };
+}
+
+document.getElementById('cartBtn').addEventListener('click',showCart);
+
+document.getElementById('menuBtn').addEventListener('click',()=>{
+  showToast('Use the navigation links above');
 });
-document.getElementById('menuBtn').addEventListener('click',()=>showToast('Use the navigation links above'));
-  function removeItem(index){
+
+function removeItem(index){
   cartItems.splice(index,1);
   cart=cartItems.length;
   document.getElementById('cartCount').textContent=cart;
-  showToast('Item removed');
-  
+  showCart();
 }
 
 function changeQty(index,change){
@@ -103,9 +124,9 @@ function changeQty(index,change){
 
   cart=cartItems.length;
   document.getElementById('cartCount').textContent=cart;
-  showToast('Cart updated');
-  
-  }
+  showCart();
+}
+
 render();
 </script>
 </body></html>
