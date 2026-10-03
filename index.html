@@ -34,8 +34,18 @@ const products=[
 ['Shoulder Bag','₹1,299','prod-bag.jpg','Accessories']
 ];
 let cart=0;
+  let cartItems=[];
 function render(items=products){document.getElementById('products').innerHTML=items.map((p,i)=>`<article class="product"><button style="border:0;background:none;padding:0;width:100%;cursor:pointer" onclick="addCart('${p[0]}')"><img src="${p[2]}" alt="${p[0]}"></button><div class="product-name">${p[0]}</div><div class="price">${p[1]}</div><div class="swatches"><span class="swatch s1"></span><span class="swatch ${i%2?'s3':'s2'}"></span></div></article>`).join('')}
-function addCart(name){cart++;document.getElementById('cartCount').textContent=cart;showToast(`${name} added to cart`)}
+function addCart(name){
+  const product=products.find(p=>p[0]===name);
+  if(!product) return;
+
+  cartItems.push(product);
+  cart=cartItems.length;
+
+  document.getElementById('cartCount').textContent=cart;
+  showToast(`${name} added to cart`);
+}
 function filterProducts(cat){render(products.filter(p=>p[3]===cat));document.getElementById('shop').scrollIntoView({behavior:'smooth'});showToast(`Showing ${cat}`)}
 function resetProducts(){render()}
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(window.tt);window.tt=setTimeout(()=>t.classList.remove('show'),1800)}
@@ -43,9 +53,23 @@ document.getElementById('signup').addEventListener('submit',e=>{e.preventDefault
 console.log("CART CODE LOADED");document.getElementById('cartBtn').addEventListener('click',()=>{
   const cartBox=document.createElement('div');
   cartBox.style.cssText='position:fixed;top:80px;right:15px;width:320px;background:white;z-index:9999;padding:25px;box-shadow:0 5px 25px rgba(0,0,0,.25);border:1px solid #ddd;';
-  cartBox.innerHTML=`<h2>Shopping Bag</h2>
-  <p>You have ${cart} item(s) in your bag.</p>
-  <button id="closeCart">Close</button>`;
+  cartBox.innerHTML=`
+<h2>Shopping Bag</h2>
+<p>You have ${cartItems.length} item(s) in your bag.</p>
+
+${cartItems.map(p=>`
+<div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid #ddd;">
+  <span>${p[0]}</span>
+  <strong>${p[1]}</strong>
+</div>
+`).join('')}
+
+<h3 style="display:flex;justify-content:space-between;">
+  <span>Total</span>
+  <span>₹${cartItems.reduce((sum,p)=>sum+Number(p[1].replace(/[₹,]/g,'')),0).toLocaleString('en-IN')}</span>
+</h3>
+
+<button id="closeCart">Close</button>`;
   document.body.appendChild(cartBox);
 
   document.getElementById('closeCart').onclick=()=>cartBox.remove();
