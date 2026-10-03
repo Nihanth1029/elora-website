@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -90,7 +91,7 @@ document.getElementById('menuBtn').addEventListener('click',()=>showToast('Use t
   cart=cartItems.length;
   document.getElementById('cartCount').textContent=cart;
   showToast('Item removed');
-  document.getElementById('cartBtn').click();
+  
 }
 
 function changeQty(index,change){
@@ -103,7 +104,7 @@ function changeQty(index,change){
   cart=cartItems.length;
   document.getElementById('cartCount').textContent=cart;
   showToast('Cart updated');
-  document.getElementById('cartBtn').click();
+  
   }
 render();
 </script>
